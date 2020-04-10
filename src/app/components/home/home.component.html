@@ -1,0 +1,48 @@
+<div class="left-side">
+  <div class="top-logo" *ngIf="_sharedService.endpoints?.length">
+    <img src="assets/logo3.png" width="80px" height="80px" />
+  </div>
+  <div id="ed_list">
+    <div class="text-center btn2 padding" *ngFor="let ed of _sharedService.endpoints">
+      <div class="ed" (click)="openEndpoint(ed)" [ngClass]="ed.id == _sharedService.curOpenedId ? 'selected' : 'unselected'">{{ed.name}}</div>
+    </div>
+  </div>
+  <div class="text-center arrow-section">
+    <div class="arrow-icon-div">
+      <div class="glyphicon glyphicon-arrow-left my-icon" title="Back" (click)="goBack();"></div>
+    </div>
+    <div class="arrow-icon-div">
+      <div class="glyphicon glyphicon-arrow-right my-icon" title="Forward" (click)="goForward();"></div>
+    </div>
+  </div>
+  <div class="icon-set">
+    <div class="text-center btn0">
+      <div class="glyphicon-plus my-icon" title="Add a new endpoint" (click)="goAdding();"></div>
+    </div>
+    <div class="text-center btn1">
+      <div class="glyphicon glyphicon-cog my-icon" title="Settings" (click)="goSetting();"></div>
+    </div>
+  </div>
+  <div class="version-section text-center">
+    Version 1.1.0<br>9th July 18
+  </div>
+</div>
+<div class="right-side" (window:resize)="onResized($event)">
+  <div *ngIf="!_sharedService.endpoints?.length && !_sharedService.curOpenedId">
+    <div class="logo-div"><img src="assets/sme_logo.png"></div>
+    <div class="text-center fabric-title">File Fabric</div>
+    <div class="text-center add-txt">Add your first Endpoint</div>
+    <div class="text-center"><img src="assets/plus.png" width="18px" height="18px" (click)="goAdding();" /></div>
+    <div class="text-center ta-txt">In continuing you agree to our <a (click)="goEULA()">EULA</a> and
+      <a (click)="goTerms()">Terms of Use</a>
+    </div>
+  </div>
+  <div *ngIf="_sharedService.endpoints?.length && !_sharedService.curOpenedId">
+    <div class="logo-div"><img src="assets/sme_logo.png"></div>
+    <div class="text-center fabric-title"></div>
+    <div class="text-center add-txt"></div>
+    <div class="text-center ta-txt">Please select endpoint</div>
+  </div>
+  <div *ngIf="_sharedService.endpoints?.length" #container class="webview-container"></div>
+</div>
+<router-outlet></router-outlet>

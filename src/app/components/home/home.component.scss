@@ -1,0 +1,108 @@
+.left-side {
+  height: 100%;
+  width: 100px;
+  border-right: solid 1px #949090;
+  float: left;
+  text-align: center;
+  background-color: rgb(39, 60, 85);
+}
+
+.my-icon {
+  color: white;
+}
+
+.icon-set {
+  bottom: 31px;
+  position: absolute;
+  padding-left: 37px;
+  padding-bottom: 11px;
+}
+
+.right-side {
+  width: calc(100% - 100px);
+  height: 100%;
+  float: right;
+}
+
+.padding {
+  padding: 15px 5px 2px 5px;
+}
+
+.btn0 {
+  font-size: 35px;
+}
+
+.btn1 {
+  font-size: 25px;
+}
+
+.btn2 {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  border-bottom: 1px solid #b5afaf;
+}
+
+.logo-div {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.fabric-title {
+  font-size: 33px;
+  padding-bottom: 20px;
+}
+
+.add-txt {
+  font-size: 20px;
+}
+
+.ta-txt {
+  padding-top: 15px;
+}
+
+.selected {
+  color: #f3e41f;
+}
+
+.unselected {
+  color: white;
+}
+
+.top-logo {
+  padding-top: 0px;
+}
+
+.ed {
+  cursor: pointer;
+}
+
+.arrow-section {
+  position: absolute;
+  width: 100px;
+  display: flex;
+  bottom: 126px;
+}
+
+.arrow-icon-div {
+  flex-grow: 1;
+}
+
+.glyphicon-arrow-left,
+.glyphicon-arrow-right {
+  font-size: 20px;
+}
+
+.my-icon:active {
+  color: #647ee6;
+}
+
+.version-section {
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  position: absolute;
+  bottom: 2px;
+  width: 100px;
+}

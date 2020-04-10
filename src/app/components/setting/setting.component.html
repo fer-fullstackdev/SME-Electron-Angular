@@ -1,0 +1,27 @@
+<button class="close" (click)="closeDlg()">&times;</button>
+<div class="main-container">
+  <div class="logo-div text-center">
+    <img src="assets/sme_logo.png">
+  </div>
+  <div class="text-center">Endpoint Settings</div>
+  <div class="">
+    <div>&nbsp;</div>
+    <div class="text-center help-txt">From here you can remove previously added File Fabric endpoints.</div>
+    <div>&nbsp;</div>
+    <div class="text-center">
+      <div class="list-group" *ngIf="_sharedService.endpoints.length">
+        <a class="list-group-item" *ngFor="let ed of _sharedService.endpoints">
+          <span>{{ed.name}}</span>: <span>{{ed.url}}</span>
+          <span class="pull-right">
+          <button class="btn btn-xs btn-warning" (click)="removeOne(ed.id)">
+              <span class="glyphicon glyphicon-trash"></span>
+          </button>
+          </span>
+        </a>
+      </div>
+      <div *ngIf="!_sharedService.endpoints.length">
+        No endpoints added
+      </div>
+    </div>
+  </div>
+</div>

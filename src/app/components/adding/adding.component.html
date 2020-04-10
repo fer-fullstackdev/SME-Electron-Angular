@@ -1,0 +1,18 @@
+<button class="close" (click)="closeDlg()">&times;</button>
+<div class="main-container">
+  <div class="logo-div text-center">
+    <img src="assets/sme_logo.png">
+  </div>
+  <div>&nbsp;</div>
+  <div class="">
+    <div>Name this Tabbed shortcut</div>
+    <input type="text" class="form-control" [(ngModel)]="name" placeholder="Name">
+    <div>&nbsp;</div>
+    <div>What is your File Fabric domain</div>
+    <input type="text" class="form-control" [(ngModel)]="url" placeholder="Endpoint URL">
+    <div>&nbsp;</div>
+    <div class="text-center">
+      <button class="btn btn-small" (click)="addEndpoint();">Add</button>
+    </div>
+  </div>
+</div>
