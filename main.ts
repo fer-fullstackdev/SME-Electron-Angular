@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, Menu, webContents } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -13,16 +13,41 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
+    center: true,
+    width: 1000,
+    height: size.height-15,
+    maxHeight: size.height-15,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
       webviewTag: true
     },
   });
+
+  /*
+  // and load the index.html of the app.
+  win.loadURL(url.format({
+    protocol: 'file:',
+    pathname: path.join(__dirname, '/index.html'),
+    slashes:  true
+  }));
+  win.on('resize', () => {
+    const [width, height] = win.getContentSize()
+    for (let wc of webContents.getAllWebContents()) {
+      // Check if `wc` belongs to a webview in the `win` window.
+      if (wc.hostWebContents && wc.hostWebContents.id === win.webContents.id) {
+        let curSize = BrowserWindow.getFocusedWindow().getSize();
+        console.log('curSize: ', curSize);
+        wc.setSize({
+          normal: {
+            width: width - 100,
+            height: curSize[1] - 22
+          }
+        })
+      }
+    }
+  })
+  */
 
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -48,6 +73,24 @@ function createWindow(): BrowserWindow {
     // when you should delete the corresponding element.
     win = null;
   });
+
+  // Create the Application's main menu
+  let menu = Menu.buildFromTemplate([{
+    label: "Application",
+    submenu: [
+      { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+    ]}, {
+    label: "Edit",
+    submenu: [
+      { label: "Undo", accelerator: "CmdOrCtrl+Z", role: "undo" },
+      { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", role: "redo" },
+      { type: "separator" },
+      { label: "Cut", accelerator: "CmdOrCtrl+X", role: "cut" },
+      { label: "Copy", accelerator: "CmdOrCtrl+C", role: "copy" },
+      { label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste" }
+    ]}
+  ]);
+  Menu.setApplicationMenu(menu);
 
   return win;
 }
