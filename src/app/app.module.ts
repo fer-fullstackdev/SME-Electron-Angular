@@ -23,6 +23,8 @@ import { WebviewDirective } from './directives/webview.directive';
 import { sharedService } from './providers/shared.service';
 import { CanActivateGuard } from './providers/canactivate.guard.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 // AoT requires an exported function for factories
@@ -46,6 +48,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CoreModule,
     AppRoutingModule,
     MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
