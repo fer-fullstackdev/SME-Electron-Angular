@@ -10,12 +10,10 @@
     <div>&nbsp;</div>
     <div class="text-center">
       <div class="list-group" *ngIf="_sharedService.endpoints.length">
-        <a class="list-group-item" *ngFor="let ed of _sharedService.endpoints">
+        <a class="list-group-item line-item" *ngFor="let ed of _sharedService.endpoints">
           <span>{{ed.name}}</span>: <span>{{ed.url}}</span>
           <span class="pull-right">
-          <button class="btn btn-xs btn-warning" (click)="removeOne(ed.id)">
-              <span class="glyphicon glyphicon-trash"></span>
-          </button>
+            <i class="fa fa-trash my-icon" aria-hidden="true" (click)="removeOne(ed.id)"></i>
           </span>
         </a>
       </div>

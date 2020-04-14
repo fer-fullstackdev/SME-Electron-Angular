@@ -9,22 +9,23 @@
   </div>
   <div class="text-center arrow-section">
     <div class="arrow-icon-div">
-      <div class="glyphicon glyphicon-arrow-left my-icon" title="Back" (click)="goBack();"></div>
+      <i class="fa fa-arrow-left my-icon" aria-hidden="true" title="Back" (click)="goBack();"></i>
     </div>
     <div class="arrow-icon-div">
-      <div class="glyphicon glyphicon-arrow-right my-icon" title="Forward" (click)="goForward();"></div>
+      <i class="fa fa-arrow-right my-icon" aria-hidden="true" title="Forward" (click)="goForward();"></i>
     </div>
   </div>
   <div class="icon-set">
     <div class="text-center btn0">
-      <div class="glyphicon-plus my-icon" title="Add a new endpoint" (click)="goAdding();"></div>
+      <i class="fa fa-plus my-icon" aria-hidden="true" title="Add a new endpoint" (click)="goAdding();"></i>
     </div>
     <div class="text-center btn1">
-      <div class="glyphicon glyphicon-cog my-icon" title="Settings" (click)="goSetting();"></div>
+      <!-- <div class="glyphicon glyphicon-cog my-icon" title="Settings" (click)="goSetting();"></div> -->
+      <i class="fa fa-cog my-icon" aria-hidden="true" title="Settings" (click)="goSetting();"></i>
     </div>
   </div>
   <div class="version-section text-center">
-    Version 1.1.1<br>9th April 20
+    Version 1.1.1<br>14th April 20
   </div>
 </div>
 <div class="right-side" (window:resize)="onResized($event)">
