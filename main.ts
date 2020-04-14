@@ -16,7 +16,7 @@ function createWindow(): BrowserWindow {
     center: true,
     width: 1000,
     height: size.height-15,
-    maxHeight: size.height-15,
+    // maxHeight: size.height-15,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
