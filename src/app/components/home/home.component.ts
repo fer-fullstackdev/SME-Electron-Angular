@@ -140,24 +140,30 @@ export class HomeComponent implements OnInit {
         if( _.includes(this.openedArr, endpoint.id) ) {
           this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".webview" + endpoint.id), 'display', 'flex');
         } else {
-          let webviewDiv = document.createElement('div');
           let loadingTxtContent = document.createTextNode('Loading...');
+          let indicatorDiv = document.createElement('div');
+          indicatorDiv.style.height = '25px';
+          indicatorDiv.appendChild(loadingTxtContent);
+          
+          let webviewDiv = document.createElement('div');
           webviewDiv.setAttribute('class', 'webview' + endpoint.id);
-          webviewDiv.appendChild(loadingTxtContent);
+          webviewDiv.appendChild(indicatorDiv);
+
           this.elementRef.nativeElement.querySelector('.webview-container').appendChild(webviewDiv);
           let webview = document.createElement('webview');
           webview.setAttribute('id', 'id_' + endpoint.id);
           webview.setAttribute('src', endpoint.url);
           webview.style.display = 'flex';
           webview.style.width = '100%';
-          webview.style.height = (this.screenHeight - 22 - 15) + 'px',
+          webview.style.height = (remote.getCurrentWindow().getSize()[1] - 50) + 'px';
           webview.setAttribute('partition', 'persist:' + endpoint.url + endpoint.id);
-          console.log('webview: ', webview);
-          webview.addEventListener('did-finish-load', function(res) {
+
+          webview.addEventListener('did-navigate', function(res) {
             try {
-              webviewDiv.removeChild(loadingTxtContent);
+              webviewDiv.removeChild(indicatorDiv);
+              webview.style.height = (remote.getCurrentWindow().getSize()[1] - 25) + 'px';
             } catch (error) {
-              console.log('did-finish-load error: , ', error);
+              console.log('did-navigate error: , ', error);
             }
           });
           webview.addEventListener('did-fail-load', function(res) {
@@ -173,7 +179,6 @@ export class HomeComponent implements OnInit {
             }
           });
           webviewDiv.appendChild(webview);
-
           this.openedArr.push(endpoint.id);
         }
         this._sharedService.curOpenedId = endpoint.id;
@@ -182,26 +187,31 @@ export class HomeComponent implements OnInit {
       this.isOpenedEPExist = true;
       this._sharedService.curOpenedId = endpoint.id;
 
-      let webviewDiv = document.createElement('div');
       let loadingTxtContent = document.createTextNode('Loading...');
+      let indicatorDiv = document.createElement('div');
+      indicatorDiv.style.height = '25px';
+      indicatorDiv.appendChild(loadingTxtContent);
+
+      let webviewDiv = document.createElement('div');
       webviewDiv.setAttribute('class', 'webview' + endpoint.id);
-      webviewDiv.appendChild(loadingTxtContent);
+      webviewDiv.appendChild(indicatorDiv);
+
       this.elementRef.nativeElement.querySelector('.webview-container').appendChild(webviewDiv);
       let webview = document.createElement('webview');
       webview.setAttribute('id', 'id_' + endpoint.id);
       webview.setAttribute('src', endpoint.url);
       webview.style.display = 'flex';
       webview.style.width = '100%';
-      webview.style.height = (this.screenHeight - 22 - 15) + 'px',
+      webview.style.height = (remote.getCurrentWindow().getSize()[1] - 50) + 'px';
       webview.setAttribute('partition', 'persist:' + endpoint.url + endpoint.id);
-      console.log('webview: ', webview);
-      webview.addEventListener('did-finish-load', function(res) {
+      
+      webview.addEventListener('did-navigate', function(res) {
         try {
-          webviewDiv.removeChild(loadingTxtContent);
+          webviewDiv.removeChild(indicatorDiv);
+          webview.style.height = (remote.getCurrentWindow().getSize()[1] - 25) + 'px';
         } catch (error) {
-          console.log('did-finish-load error: , ', error);
+          console.log('did-navigate error: , ', error);
         }
-
       });
       webview.addEventListener('did-fail-load', function(res) {
         console.log('did-fail-load: ', res)
@@ -222,10 +232,9 @@ export class HomeComponent implements OnInit {
 
   onResized(event) {
     if(this._sharedService.curOpenedId) {
-      let curSize = [];
-      curSize = remote.getCurrentWindow().getSize();
+      let curSize = remote.getCurrentWindow().getSize();
       $('webview').each(function() {
-        $( this ).css( 'height', (curSize[1]-22+'px') );
+        $( this ).css( 'height', (curSize[1] - 25 + 'px') );
       });
     }
   }
