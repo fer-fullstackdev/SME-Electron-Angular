@@ -155,13 +155,13 @@ export class HomeComponent implements OnInit {
           webview.setAttribute('src', endpoint.url);
           webview.style.display = 'flex';
           webview.style.width = '100%';
-          webview.style.height = (remote.getCurrentWindow().getSize()[1] - 50) + 'px';
+          webview.style.height = (remote.getCurrentWindow().getContentSize()[1] - 25) + 'px';
           webview.setAttribute('partition', 'persist:' + endpoint.url + endpoint.id);
 
           webview.addEventListener('did-navigate', function(res) {
             try {
               webviewDiv.removeChild(indicatorDiv);
-              webview.style.height = (remote.getCurrentWindow().getSize()[1] - 25) + 'px';
+              webview.style.height = remote.getCurrentWindow().getContentSize()[1] + 'px';
             } catch (error) {
               console.log('did-navigate error: , ', error);
             }
@@ -202,13 +202,13 @@ export class HomeComponent implements OnInit {
       webview.setAttribute('src', endpoint.url);
       webview.style.display = 'flex';
       webview.style.width = '100%';
-      webview.style.height = (remote.getCurrentWindow().getSize()[1] - 50) + 'px';
+      webview.style.height = (remote.getCurrentWindow().getContentSize()[1] - 25) + 'px';
       webview.setAttribute('partition', 'persist:' + endpoint.url + endpoint.id);
       
       webview.addEventListener('did-navigate', function(res) {
         try {
           webviewDiv.removeChild(indicatorDiv);
-          webview.style.height = (remote.getCurrentWindow().getSize()[1] - 25) + 'px';
+          webview.style.height = remote.getCurrentWindow().getContentSize()[1] + 'px';
         } catch (error) {
           console.log('did-navigate error: , ', error);
         }
@@ -232,9 +232,8 @@ export class HomeComponent implements OnInit {
 
   onResized(event) {
     if(this._sharedService.curOpenedId) {
-      let curSize = remote.getCurrentWindow().getSize();
       $('webview').each(function() {
-        $( this ).css( 'height', (curSize[1] - 25 + 'px') );
+        $(this).css('height', (remote.getCurrentWindow().getContentSize()[1] + 'px'));
       });
     }
   }
