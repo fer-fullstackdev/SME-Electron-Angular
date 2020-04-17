@@ -21,7 +21,7 @@ function createWindow(): BrowserWindow {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
       webviewTag: true
-    },
+    }
   });
 
   /*
