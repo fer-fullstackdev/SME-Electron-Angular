@@ -15,8 +15,28 @@
 
 .line-item {
   padding: 3px 9px !important;
+  display: inline-flex;
+}
+
+.trash-div {
+  flex: auto;
 }
 
 .my-icon {
   cursor: pointer;
+  align-items: flex-end;
+}
+
+.ed-img {
+  width: 18px;
+}
+
+.trash-icon {
+  margin-right: 10px;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

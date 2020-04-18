@@ -11,6 +11,10 @@
     <div>What is your File Fabric domain</div>
     <input type="text" class="form-control" [(ngModel)]="url" placeholder="Endpoint URL">
     <div>&nbsp;</div>
+    <div>Site image</div>
+    <div><input #imageInput type="file" [(ngModel)]="siteIcon" accept=".jpg, .png, .jpeg|image/*" (change)="imgPreview(imageInput)"></div>
+    <div class="siteimg-div"><img [src]="imgURL" class="site-mg" *ngIf="imgURL"></div>
+    <div class="small-padding">&nbsp;</div>
     <div class="text-center">
       <button mat-stroked-button (click)="addEndpoint()">Add</button>
     </div>

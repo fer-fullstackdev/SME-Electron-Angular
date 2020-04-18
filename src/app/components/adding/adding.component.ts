@@ -12,9 +12,10 @@ import * as _ from 'lodash';
 export class AddingComponent implements OnInit {
   public name: string;
   public url: string;
+  public imgURL: any = '';
 
   constructor(
-    private _sharedService: sharedService,
+    private _sharedService: sharedService
   ) {}
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class AddingComponent implements OnInit {
       });
     } else {
       if( _.includes(this.url, 'https://') || _.includes(this.url, 'http://') ) {
-        this._sharedService.addOneEndpoint(this.name, this.url);
+        this._sharedService.addOneEndpoint(this.name, this.url, this.imgURL);
         this._sharedService.endpoints = this._sharedService.getAllEndpoints();
         this.closeDlg();
       } else {
@@ -50,5 +51,14 @@ export class AddingComponent implements OnInit {
   closeDlg() {
     this._sharedService.isHomePage = true;
     this._sharedService.addingDlgRef.close();
+  }
+
+  imgPreview(imageInput) {
+    const file: File = imageInput.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file); 
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
   }
 }

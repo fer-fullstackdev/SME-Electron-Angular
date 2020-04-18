@@ -19,20 +19,20 @@ export class sharedService {
     return this.endpoints;
   }
 
-  addOneEndpoint(name: string, url: string) {
+  addOneEndpoint(name: string, url: string, img: any) {
     let endpoints =  window.localStorage.getItem('endpoints');
     if( endpoints ) {
       let newArr = [];
       newArr = JSON.parse( endpoints );
       let lastId = _.maxBy(newArr, 'id').id;
-      let newObj = { id: lastId + 1, name: name, url: url };
+      let newObj = { id: lastId + 1, name: name, url: url, img: img };
       newArr.push(newObj);
       newArr = _.orderBy(newArr, [obj => obj.name.toLowerCase()], ['asc']);
       window.localStorage.setItem('endpoints', JSON.stringify(newArr));
       this.endpoints = newArr;
     } else {
       let newArr = [];
-      let newObj = { id: 1, name: name, url: url };
+      let newObj = { id: 1, name: name, url: url, img: img };
       newArr.push(newObj);
       newArr = _.orderBy(newArr, [obj => obj.name.toLowerCase()], ['asc']);
       window.localStorage.setItem('endpoints', JSON.stringify(newArr));

@@ -1,6 +1,6 @@
 .left-side {
   height: 100%;
-  width: 100px;
+  width: 120px;
   border-right: solid 1px #949090;
   float: left;
   text-align: center;
@@ -15,12 +15,12 @@
 .icon-set {
   bottom: 31px;
   position: absolute;
-  padding-left: 37px;
+  padding-left: 47px;
   padding-bottom: 11px;
 }
 
 .right-side {
-  width: calc(100% - 101px);
+  width: calc(100% - 121px);
   height: 100%;
   float: right;
 }
@@ -80,7 +80,7 @@
 
 .arrow-section {
   position: absolute;
-  width: 100px;
+  width: 120px;
   display: flex;
   bottom: 126px;
 }
@@ -105,9 +105,29 @@
   text-align: center;
   position: absolute;
   bottom: 2px;
-  width: 100px;
+  width: 120px;
 }
 
 .plus-icon {
   cursor: pointer;
+}
+
+.toolbar-div {
+  border: solid 1px red;
+  width: 100%;
+}
+
+.ed-img {
+  width: 18px;
+}
+
+.ed-item {
+  display: flex;
+}
+
+.edimg-div {
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

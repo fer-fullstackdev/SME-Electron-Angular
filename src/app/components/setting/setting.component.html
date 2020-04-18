@@ -4,22 +4,25 @@
     <img src="assets/sme_logo.png">
   </div>
   <div class="text-center">Endpoint Settings</div>
-  <div class="">
-    <div>&nbsp;</div>
-    <div class="text-center help-txt">From here you can remove previously added File Fabric endpoints.</div>
-    <div>&nbsp;</div>
-    <div class="text-center">
-      <div class="list-group" *ngIf="_sharedService.endpoints.length">
-        <a class="list-group-item line-item" *ngFor="let ed of _sharedService.endpoints">
-          <span>{{ed.name}}</span>: <span>{{ed.url}}</span>
+  <div>&nbsp;</div>
+  <div class="text-center help-txt">From here you can remove previously added File Fabric endpoints.</div>
+  <div>&nbsp;</div>
+  <div class="text-center">
+    <div class="list-group" id="ed_list1" *ngIf="_sharedService.endpoints.length">
+      <a class="list-group-item line-item" *ngFor="let ed of _sharedService.endpoints">
+        <div class="info-line">
+          <img [src]="ed.img" class="ed-img" />&nbsp;
+          <span>{{ed.name}}</span>:&nbsp;&nbsp;<span>{{ed.url}}</span>
+        </div>
+        <div class="trash-div">
           <span class="pull-right">
             <i class="fa fa-trash my-icon" aria-hidden="true" (click)="removeOne(ed.id)"></i>
           </span>
-        </a>
-      </div>
-      <div *ngIf="!_sharedService.endpoints.length">
-        No endpoints added
-      </div>
+        </div>
+      </a>
     </div>
+  </div>
+  <div *ngIf="!_sharedService.endpoints.length" class="text-center">
+    No endpoints added
   </div>
 </div>

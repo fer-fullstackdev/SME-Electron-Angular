@@ -3,6 +3,9 @@ import { sharedService } from '../../providers/shared.service';
 import { remote } from 'electron';
 let { dialog } = remote;
 
+import * as $ from 'jquery';
+import 'jquery-ui/ui/widgets/sortable.js';
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -22,6 +25,7 @@ export class SettingComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    ($('#ed_list1') as any).sortable();
   }
 
   closeDlg() {
