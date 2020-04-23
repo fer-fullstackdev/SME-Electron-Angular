@@ -5,7 +5,7 @@
   <div id="ed_list">
     <div class="text-center btn2 padding" *ngFor="let ed of _sharedService.endpoints">
       <div class="ed-item">
-        <div class="edimg-div"><img [src]="ed.img" class="ed-img" *ngIf="ed.img" />&nbsp;&nbsp;</div>
+        <div class="edimg-div" *ngIf="ed.img"><img [src]="ed.img" class="ed-img" *ngIf="ed.img" />&nbsp;&nbsp;</div>
         <div class="ed" (click)="openEndpoint(ed)" [ngClass]="ed.id == _sharedService.curOpenedId ? 'selected' : 'unselected'">{{ed.name}}</div>
       </div>
     </div>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="version-section text-center">
-    Version 1.1.1<br>18th April 20
+    Version 1.1.1<br>23th April 20
   </div>
 </div>
 <div class="right-side" (window:resize)="onResized($event)">

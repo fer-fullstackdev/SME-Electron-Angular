@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { remote, shell } from 'electron';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-let { dialog, screen } = remote;
+let { dialog, screen, session } = remote;
 import * as _ from 'lodash';
 
 import * as $ from 'jquery';
@@ -82,6 +82,8 @@ export class HomeComponent implements OnInit {
       menu.popup(remote.getCurrentWindow());
       */
     }, false);
+
+    // session.defaultSession.clearStorageData();
   }
 
   ngAfterViewInit() {
