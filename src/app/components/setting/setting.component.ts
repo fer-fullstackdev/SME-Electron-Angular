@@ -52,6 +52,7 @@ export class SettingComponent implements OnInit {
       let options  = {
         type: 'question',
         buttons: ['Yes', 'No'],
+        title: 'File Fabric',
         message: 'Do you really want to remove?'
        }
        dialog.showMessageBox(remote.getCurrentWindow(), options)
