@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { sharedService } from '../../providers/shared.service';
 import { remote } from 'electron';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 let { dialog } = remote;
 import * as _ from 'lodash';
 
@@ -13,10 +14,22 @@ export class AddingComponent implements OnInit {
   public name: string;
   public url: string;
   public imgURL: any = '';
+  public displaySetting: number = 1;
+  public endpointId: number;
 
   constructor(
-    private _sharedService: sharedService
-  ) {}
+    private _sharedService: sharedService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.endpointId = this.data.endpointId;
+    if(this.endpointId) {
+      let curEndpoint = this._sharedService.getEndPointById(this.endpointId);
+      this.name = curEndpoint.name;
+      this.url = curEndpoint.url;
+      this.imgURL = curEndpoint.img;
+      this.displaySetting = curEndpoint.displaySetting;
+    }
+  }
 
   ngOnInit() {
   }
@@ -25,25 +38,37 @@ export class AddingComponent implements OnInit {
   }
 
   addEndpoint() {
-    if( !this.name || !this.url ) {
+    if(!this.name || !this.url) {
       dialog.showMessageBox(remote.getCurrentWindow(), {
         type: 'warning',
         buttons: ['OK'],
         title: 'Confirm',
-        message: 'Please enter all input fields!'
+        message: 'Please enter endpoint name and url.'
       });
     } else {
-      if( _.includes(this.url, 'https://') || _.includes(this.url, 'http://') ) {
-        this._sharedService.addOneEndpoint(this.name, this.url, this.imgURL);
-        this._sharedService.endpoints = this._sharedService.getAllEndpoints();
-        this.closeDlg();
-      } else {
+      if(!this.imgURL && (this.displaySetting == 2 || this.displaySetting == 3)) {
         dialog.showMessageBox(remote.getCurrentWindow(), {
           type: 'warning',
           buttons: ['OK'],
           title: 'Confirm',
-          message: 'Full URL path is needed!'
+          message: 'Please select site image.'
         });
+      } else {
+        if( _.includes(this.url, 'https://') || _.includes(this.url, 'http://') ) {
+          if(!this.endpointId)
+            this._sharedService.addOneEndpoint(this.name, this.url, this.imgURL, this.displaySetting);
+          else
+            this._sharedService.updateOneEndpoint(this.endpointId, this.name, this.url, this.imgURL, this.displaySetting);
+          this._sharedService.endpoints = this._sharedService.getAllEndpoints();
+          this.closeDlg();
+        } else {
+          dialog.showMessageBox(remote.getCurrentWindow(), {
+            type: 'warning',
+            buttons: ['OK'],
+            title: 'Confirm',
+            message: 'Full URL path is needed!'
+          });
+        }
       }
     }
   }

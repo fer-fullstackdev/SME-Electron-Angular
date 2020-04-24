@@ -5,8 +5,7 @@ import { SettingComponent } from '../setting/setting.component';
 import { MatDialog } from '@angular/material/dialog';
 import { remote, shell } from 'electron';
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-let { dialog, screen, session } = remote;
+let { dialog, screen } = remote;
 import * as _ from 'lodash';
 
 import * as $ from 'jquery';
@@ -28,8 +27,7 @@ export class HomeComponent implements OnInit {
     private elementRef: ElementRef,
     public renderer: Renderer2,
     public _sharedService: sharedService,
-    public mdDialog: MatDialog,
-    public router: Router
+    public mdDialog: MatDialog
   ) {
   }
 
@@ -62,7 +60,6 @@ export class HomeComponent implements OnInit {
         return;
       }
       e.preventDefault();
-
       var curWebView = that.elementRef.nativeElement.querySelector("#id_" + that._sharedService.curOpenedId);
       let menu = new Menu();
       menu.append(new MenuItem ({
@@ -82,8 +79,6 @@ export class HomeComponent implements OnInit {
       menu.popup(remote.getCurrentWindow());
       */
     }, false);
-
-    // session.defaultSession.clearStorageData();
   }
 
   ngAfterViewInit() {
@@ -125,7 +120,6 @@ export class HomeComponent implements OnInit {
   }
 
   goSetting() {
-   
     this._sharedService.settingDlgRef = this.mdDialog.open(SettingComponent, {
       width: '900px',
       height: (this.screenHeight - 72 - 15) + 'px',
@@ -137,8 +131,6 @@ export class HomeComponent implements OnInit {
     this._sharedService.settingDlgRef.afterClosed().subscribe(result => {
       console.log('The setting dialog was closed');
     });
-    
-    // this.router.navigateByUrl('setting');
   }
 
   openEndpoint(endpoint: any) {

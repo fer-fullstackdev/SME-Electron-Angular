@@ -4,9 +4,15 @@
   </div>
   <div id="ed_list">
     <div class="text-center btn2 padding" *ngFor="let ed of _sharedService.endpoints">
-      <div class="ed-item">
-        <div class="edimg-div" *ngIf="ed.img"><img [src]="ed.img" class="ed-img" *ngIf="ed.img" />&nbsp;&nbsp;</div>
-        <div class="ed" (click)="openEndpoint(ed)" [ngClass]="ed.id == _sharedService.curOpenedId ? 'selected' : 'unselected'">{{ed.name}}</div>
+      <div class="ed-item" *ngIf="ed.displaySetting == 1" (click)="openEndpoint(ed)">
+        <div class="ed" [ngClass]="ed.id == _sharedService.curOpenedId ? 'selected' : 'unselected'">{{ed.name}}</div>
+      </div>
+      <div class="ed-item" *ngIf="ed.displaySetting == 2" (click)="openEndpoint(ed)">
+        <div class="edimg-div" *ngIf="ed.img"><img [src]="ed.img" class="ed-img" />&nbsp;&nbsp;</div>
+      </div>
+      <div class="ed-item" *ngIf="ed.displaySetting == 3" (click)="openEndpoint(ed)">
+        <div class="edimg-div" *ngIf="ed.img"><img [src]="ed.img" class="ed-img" />&nbsp;&nbsp;</div>
+        <div class="ed" [ngClass]="ed.id == _sharedService.curOpenedId ? 'selected' : 'unselected'">{{ed.name}}</div>
       </div>
     </div>
   </div>

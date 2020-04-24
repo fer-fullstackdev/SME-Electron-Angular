@@ -5,18 +5,26 @@
   </div>
   <div>&nbsp;</div>
   <div class="">
-    <div>Name this Tabbed shortcut</div>
+    <div>Name this Tabbed shortcut:</div>
     <input type="text" class="form-control" [(ngModel)]="name" placeholder="Name">
     <div>&nbsp;</div>
-    <div>What is your File Fabric domain</div>
+    <div>What is your File Fabric domain:</div>
     <input type="text" class="form-control" [(ngModel)]="url" placeholder="Endpoint URL">
     <div>&nbsp;</div>
-    <div>Site image</div>
+    <div>Display Setting:</div>
+    <select [(ngModel)]="displaySetting">
+      <option [value]=1>Show text only</option>
+      <option [value]=2>Show icon only</option>
+      <option [value]=3>Show both icon and text</option>
+    </select>
+    <div>&nbsp;</div>
+    <div>Site image:</div>
     <div><input #imageInput type="file" accept=".jpg, .png, .jpeg|image/*" (change)="imgPreview(imageInput)"></div>
     <div class="siteimg-div"><img [src]="imgURL" class="site-mg" *ngIf="imgURL"></div>
     <div class="small-padding">&nbsp;</div>
     <div class="text-center">
-      <button mat-stroked-button (click)="addEndpoint()">Add</button>
+      <button mat-stroked-button *ngIf="endpointId" (click)="addEndpoint()">Update</button>
+      <button mat-stroked-button *ngIf="!endpointId" (click)="addEndpoint()">Add</button>
     </div>
   </div>
 </div>
