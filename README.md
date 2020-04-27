@@ -2,7 +2,7 @@
 
 # Introduction
 
-Angular 9 and Electron 8 (Typescript + SASS + Hot Reload) Desktop applications.
+Angular 9 and Electron 8 (Typescript + SASS + Hot Reload) Desktop application.
 
 Currently runs with:
 
