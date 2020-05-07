@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, Menu, webContents } from 'electron';
+import { app, BrowserWindow, screen, Menu, webContents, session } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -117,6 +117,18 @@ try {
     if (win === null) {
       createWindow();
     }
+  });
+
+  app.on('before-quit', () => {
+    session.defaultSession.cookies.flushStore().catch((err) => {
+      console.log(`There was a problem flushing cookies:\n${err}`);
+    });
+  });
+
+  app.on('browser-window-blur', () => {
+    session.defaultSession.cookies.flushStore().catch((err) => {
+      console.log(`There was a problem flushing cookies:\n${err}`);
+    });
   });
 
 } catch (e) {
